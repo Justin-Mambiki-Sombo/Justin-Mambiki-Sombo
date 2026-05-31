@@ -41,6 +41,9 @@ document.addEventListener('DOMContentLoaded', function() {
         scrollContainer.addEventListener('scroll', () => {
             let current = '';
             const scrollPosition = scrollContainer.scrollTop; 
+            
+            // NOUVEAU : On calcule la hauteur totale pour savoir si on est tout en bas
+            const maxScroll = scrollContainer.scrollHeight - scrollContainer.clientHeight; 
 
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
@@ -49,6 +52,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     current = section.getAttribute('id');
                 }
             });
+
+            // NOUVEAU : Si on a scrollé tout en bas, on force l'activation de Contact
+            if (Math.ceil(scrollPosition) >= maxScroll - 20) {
+                current = 'contact';
+            }
 
             navLinks.forEach(link => {
                 link.classList.remove('active');
@@ -95,9 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if(btnReveal && secretMessage) {
         btnReveal.addEventListener('click', function() {
-            // Afficher le message
             secretMessage.style.display = 'block';
-            // Cacher le bouton
             this.style.display = 'none';
         });
     }
@@ -111,34 +117,63 @@ document.addEventListener('DOMContentLoaded', function() {
         btnAddSkill.addEventListener('click', function() {
             const val = inputSkill.value;
             
-            // Vérification que ce n'est pas vide
             if(val.trim() !== "") {
-                // 1. Créer le li
                 const newLi = document.createElement('li');
-                
-                // 2. Créer le texte
                 const textSpan = document.createElement('span');
                 textSpan.textContent = val;
                 
-                // 3. Créer le bouton supprimer (Croix)
                 const btnDelete = document.createElement('button');
                 btnDelete.innerHTML = '<i class="fas fa-times"></i>';
                 btnDelete.classList.add('btn-delete-skill');
                 
-                // 4. Action de suppression au clic sur la croix
                 btnDelete.addEventListener('click', function() {
                     newLi.remove();
                 });
 
-                // 5. Tout assembler
                 newLi.appendChild(textSpan);
                 newLi.appendChild(btnDelete);
                 listSkills.appendChild(newLi);
                 
-                // 6. Vider le champ
                 inputSkill.value = "";
             } else {
                 alert("Oups !! il est impossible d'ajouter cette compétence. Veuillez écrire une compétence !");
+            }
+        });
+    }
+
+    // --- 6. FONCTIONNALITÉ AGRANDISSEMENT DES IMAGES (LIGHTBOX) ---
+    const lightbox = document.getElementById('image-lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.querySelector('.lightbox-close');
+    const floatImages = document.querySelectorAll('.float-img');
+
+    if (lightbox && lightboxImg && floatImages) {
+        // Ouvrir la lightbox au clic sur une image
+        floatImages.forEach(img => {
+            img.addEventListener('click', function() {
+                lightbox.style.display = 'flex'; // On affiche le conteneur
+                lightboxImg.src = this.src; // On copie le chemin de l'image cliquée
+                setTimeout(() => lightbox.classList.add('active'), 10); // Petit délai pour l'animation CSS
+            });
+        });
+
+        // Fonction pour fermer la lightbox
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            setTimeout(() => {
+                lightbox.style.display = 'none';
+            }, 300); // Attend la fin de l'animation CSS avant de masquer
+        }
+
+        // Fermer au clic sur la croix
+        if (lightboxClose) {
+            lightboxClose.addEventListener('click', closeLightbox);
+        }
+
+        // Fermer au clic n'importe où en dehors de l'image (sur le fond flou)
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                closeLightbox();
             }
         });
     }

@@ -474,3 +474,225 @@ ul { list-style: none; }
     background: #ff6b81;
     transform: scale(1.1);
 }
+
+/* --- SECTION EXPERIENCES & STAGES --- */
+.experience-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 0 30px;
+}
+
+.experience-card {
+    background: var(--bg-card);
+    border-left: 4px solid var(--accent);
+    padding: 25px;
+    border-radius: 0 5px 5px 0;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.experience-card:hover {
+    transform: translateX(10px); /* Petit effet de glissement vers la droite au survol */
+    background: #313140;
+}
+
+.exp-header {
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 15px;
+}
+
+.exp-header h3 {
+    color: var(--text-white);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.exp-company {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 14px;
+    display: block;
+    margin-top: 5px;
+}
+
+.exp-date {
+    color: var(--text-gray);
+    font-size: 12px;
+    font-style: italic;
+    display: block;
+    margin-top: 5px;
+}
+
+.exp-body p {
+    color: var(--text-gray);
+    font-size: 13px;
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.exp-body ul {
+    list-style-type: none; /* On enlève les puces par défaut */
+    margin-bottom: 15px;
+}
+
+.exp-body ul li {
+    color: var(--text-gray);
+    font-size: 13px;
+    margin-bottom: 5px;
+    padding-left: 15px;
+    position: relative;
+}
+
+/* Customisation des puces de la liste (petits tirets jaunes) */
+.exp-body ul li::before {
+    content: "▹"; 
+    color: var(--accent);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+.exp-body strong {
+    color: var(--text-white);
+    font-weight: 600;
+}
+
+/* Les petits badges (tags) pour les technologies */
+.exp-tech {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.exp-tech span {
+    background: rgba(255, 193, 7, 0.1);
+    color: var(--accent);
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 20px;
+    border: 1px solid var(--accent);
+}
+/* --- CONTENEUR DES IMAGES DE STAGE --- */
+.exp-images {
+    margin-top: 25px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap; /* Permet un bon rendu même sur petit écran */
+}
+
+/* Style de base des images */
+.float-img {
+    width: calc(33.33% - 10px);
+    max-width: 140px;
+    height: 90px;
+    object-fit: cover; /* Recadre proprement l'image sans la déformer */
+    border-radius: 6px;
+    border: 1px solid rgba(255, 193, 7, 0.2); /* Légère bordure jaune */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Ombre pour accentuer l'effet suspendu */
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* --- ANIMATION DE FLOTTAISON --- */
+/* Image 1 : Flotte en 3 secondes */
+.img-1 {
+    animation: floatEffect 3s ease-in-out infinite;
+}
+
+/* Image 2 : Flotte en 3.6 secondes avec un léger retard */
+.img-2 {
+    animation: floatEffect 3.6s ease-in-out infinite;
+    animation-delay: 0.4s;
+}
+
+/* Image 3 : Flotte en 4.2 secondes avec un plus grand retard */
+.img-3 {
+    animation: floatEffect 4.2s ease-in-out infinite;
+    animation-delay: 0.8s;
+}
+
+/* Définition du mouvement de haut en bas (8 pixels max) */
+@keyframes floatEffect {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-8px); /* Monte de 8px */
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* --- EFFET AU SURVOL SUR UNE IMAGE --- */
+.float-img:hover {
+    animation-play-state: paused; /* Met en pause la flottaison au survol */
+    transform: scale(1.1) !important; /* Zoom léger */
+    border-color: var(--accent); /* La bordure devient jaune pétant */
+    box-shadow: 0 12px 25px rgba(255, 193, 7, 0.3); /* Ombre jaune brillante */
+    cursor: pointer;
+}
+
+/* --- STYLE DE LA LIGHTBOX AVEC EFFET DE FLOU (BACKDROP-FILTER) --- */
+.lightbox {
+    display: none; /* Caché par défaut */
+    position: fixed;
+    z-index: 2000; /* S'affiche au-dessus de tout le reste, même de la sidebar */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* On baisse l'opacité du fond sombre pour laisser passer la lumière et le flou */
+    background-color: rgba(15, 15, 23, 0.4); 
+    
+    /* L'effet magique qui rend le reste du site flou */
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); /* Pour la compatibilité avec Safari/iPhone */
+    
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Conteneur de l'image agrandie */
+.lightbox-content {
+    max-width: 85%;
+    max-height: 85%;
+    object-fit: contain;
+    border: 2px solid var(--accent); /* Bordure jaune signature */
+    border-radius: 6px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); /* Ombre prononcée pour détacher l'image du flou */
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+/* Animation d'apparition */
+.lightbox.active {
+    opacity: 1;
+}
+.lightbox.active .lightbox-content {
+    transform: scale(1);
+}
+
+/* Bouton Fermer (la croix) */
+.lightbox-close {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    color: var(--text-white);
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Petite ombre pour que la croix reste bien visible */
+}
+
+.lightbox-close:hover {
+    color: var(--accent);
+    transform: scale(1.1);
+}
