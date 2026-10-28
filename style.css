@@ -117,7 +117,13 @@ ul { list-style: none; }
         box-shadow: 0 0 0 0 rgba(255, 193, 7, 0);
     }
 }
-.avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid var(--bg-card); }
+.avatar { width: 100%; 
+    height: 100%; 
+    border-radius: 50%; 
+    object-fit: cover; 
+    object-position: center top; /* Aligne l'image pour révéler le haut de la tête */
+    border: 3px solid var(--bg-card);
+}
 .name { font-size: 16px; font-weight: 600; margin-bottom: 5px; }
 .role { font-size: 12px; color: var(--text-gray); }
 
@@ -187,14 +193,15 @@ ul { list-style: none; }
     flex: 1; position: relative; display: flex; align-items: flex-end; justify-content: center;
 }
 .hero-person-img {
-    max-height: 100%; /* Fait dépasser légèrement si possible */
+    max-height: 153%; /* On grossit l'image (elle dépasse la taille de la bannière) */
     width: auto;
     object-fit: contain;
     position: absolute;
-    bottom: 0;
-    right: 20px;
-    filter: drop-shadow(0 0 10px rgba(0,0,0,0.5)); /* Ombre portée pour détacher l'image du fond */
+    bottom: -200px; /* On la descend pour que le bas soit parfaitement calé/coupé par la bordure */
+    right: 5%; /* Un peu de marge à droite */
+    filter: drop-shadow(0 0 15px rgba(0,0,0,0.7)); /* On renforce un peu l'ombre pour la détacher du fond */
     z-index: 5;
+    /* (Les lignes mask-image ont été supprimées pour enlever la transparence) */
 }
 
 .btn-explore {
@@ -649,7 +656,7 @@ ul { list-style: none; }
     /* On baisse l'opacité du fond sombre pour laisser passer la lumière et le flou */
     background-color: rgba(15, 15, 23, 0.4); 
     
-    /* L'effet magique qui rend le reste du site flou */
+    /* L'effet magique qui rend le site flou */
     backdrop-filter: blur(10px); 
     -webkit-backdrop-filter: blur(10px); /* Pour la compatibilité avec Safari/iPhone */
     
@@ -695,4 +702,159 @@ ul { list-style: none; }
 .lightbox-close:hover {
     color: var(--accent);
     transform: scale(1.1);
+}
+
+/* --- ÉCRAN DE CHARGEMENT (SPLASH SCREEN) --- */
+#splash-screen {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background-color: var(--bg-dark);
+    z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.8s ease;
+}
+
+.splash-content {
+    display: flex; flex-direction: column; align-items: center;
+}
+
+#logo-wrapper {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 25px;
+    transition: opacity 0.4s ease;
+}
+
+/* --- LES ANNEAUX TOURNANTS --- */
+.ring {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    margin: auto;
+    border-radius: 50%;
+}
+
+/* Anneau extérieur : plus lent (2s) */
+.outer-ring {
+    width: 100%; height: 100%;
+    animation: spinRing 2s linear infinite;
+}
+
+/* Anneau intérieur : plus petit (75%), plus rapide (1s) et inversé */
+.inner-ring {
+    width: 75%; height: 75%;
+    animation: spinRing 1s linear infinite reverse; 
+}
+
+/* Base pour tous les traits */
+.arc {
+    position: absolute;
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    border: 4px solid transparent;
+}
+
+/* Grands traits raccourcis */
+.outer-arc {
+    border-top: 4px solid var(--accent);
+    clip-path: polygon(25% 0, 75% 0, 50% 50%); /* Coupe les bords pour raccourcir le trait */
+}
+.outer-arc:nth-child(1) { transform: rotate(0deg); }
+.outer-arc:nth-child(2) { transform: rotate(120deg); }
+.outer-arc:nth-child(3) { transform: rotate(240deg); }
+
+/* Nouveaux petits traits (plus courts et plus fins) */
+.inner-arc {
+    border-top: 3px solid var(--accent);
+    clip-path: polygon(35% 0, 65% 0, 50% 50%); /* Coupe encore plus drastique */
+    opacity: 0.7;
+}
+/* Décalage de l'angle pour ne pas se superposer aux grands traits */
+.inner-arc:nth-child(1) { transform: rotate(60deg); } 
+.inner-arc:nth-child(2) { transform: rotate(180deg); }
+.inner-arc:nth-child(3) { transform: rotate(300deg); }
+
+@keyframes spinRing {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+/* Décalage des 3 traits pour former un cercle harmonieux */
+.arc:nth-child(1) { transform: rotate(0deg); }
+.arc:nth-child(2) { transform: rotate(120deg); }
+.arc:nth-child(3) { transform: rotate(240deg); }
+
+/* Logo blanc */
+#splash-logo {
+    width: 100px;
+    height: auto;
+    filter: brightness(0) invert(1);
+    position: relative;
+    z-index: 2;
+}
+
+/* Le texte avec son curseur machine à écrire */
+#splash-text {
+    color: var(--accent);
+    font-size: 22px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase;
+    min-height: 33px; /* Évite que la page saute au démarrage */
+    border-right: 3px solid var(--accent);
+    padding-right: 8px;
+    animation: blinkCursor 0.7s infinite;
+    transition: opacity 0.3s ease;
+}
+
+/* Quand on passe à "Bienvenue", on retire le curseur */
+#splash-text.no-cursor {
+    border-right: none;
+    animation: none;
+    padding-right: 0;
+}
+
+@keyframes spinRing {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes blinkCursor {
+    0%, 100% { border-color: transparent; }
+    50% { border-color: var(--accent); }
+}
+
+/* L'effet d'aspiration */
+.zoom-into-site {
+    transform: scale(25);
+    filter: blur(15px);
+    opacity: 0;
+    transition: all 1.2s cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+/* L'animation qui fait tourner le logo à 360 degrés */
+@keyframes spinLogo {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* L'effet de zoom appliqué par le JavaScript pour "entrer" dans le site */
+.zoom-into-site {
+    transform: scale(15); /* Grossit énormément pour faire l'effet de traversée */
+    opacity: 0;
+}
+
+/* --- PERSONNALISATION DE LA BARRE DE DÉFILEMENT --- */
+::-webkit-scrollbar {
+    width: 8px; /* Affine la barre */
+}
+
+::-webkit-scrollbar-track {
+    background: transparent; /* Rend le fond/tuyau invisible */
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2); /* Trait gris clair et discret */
+    border-radius: 10px; /* Arrondit les bords du trait */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent); /* Devient jaune au survol */
 }

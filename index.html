@@ -11,12 +11,35 @@
 </head>
 <body>
 
+    <!-- ÉCRAN DE CHARGEMENT (SPLASH SCREEN) -->
+    <div id="splash-screen">
+        <div class="splash-content">
+            <div id="logo-wrapper">
+                <!-- Les grands traits à l'extérieur -->
+                <div class="ring outer-ring">
+                    <div class="arc outer-arc"></div>
+                    <div class="arc outer-arc"></div>
+                    <div class="arc outer-arc"></div>
+                </div>
+                <!-- Les petits traits à l'intérieur -->
+                <div class="ring inner-ring">
+                    <div class="arc inner-arc"></div>
+                    <div class="arc inner-arc"></div>
+                    <div class="arc inner-arc"></div>
+                </div>
+                <img src="logo-jd.png" alt="Logo JD" id="splash-logo">
+            </div>
+            <!-- Vide au départ pour l'effet machine à écrire -->
+            <h2 id="splash-text"></h2>
+        </div>
+    </div>
+
     <div class="app-container">
 
         <aside class="sidebar">
             <div class="sidebar-header">
                 <div class="avatar-container">
-                    <img src="photo.jpeg" alt="Justin Mambiki" class="avatar">
+                    <img src="photo.JPG" alt="Justin Mambiki" class="avatar">
                     <div class="status-dot"></div>
                 </div>
                 <h3 class="name">Justin MAMBIKI</h3>
@@ -60,8 +83,8 @@
 
             <div class="sidebar-content">
                 <ul class="info-table">
-                    <li><span>Ville:</span> <span>Cachan (94)</span></li>
-                    <li><span>Âge:</span> <span>22 ans</span></li>
+                    <li><span>Ville:</span> <span>Cachant (94230)</span></li> <!--[cite: 1]-->
+                    <li><span>Âge:</span> <span>23 ans</span></li> <!--[cite: 1]-->
                     <li><span>Mobilité:</span> <span>Île-de-France</span></li>
                 </ul>
 
@@ -117,8 +140,7 @@
                     </li>
                 </ul>
 
-
-                <a href="CV Justin MAMBIKI alternance.pdf" download class="btn-download">
+                <a href="CV Justin MAMBIKI alternance 2.0.pdf" download class="btn-download">
                     TÉLÉCHARGER MON CV <i class="fas fa-download"></i>
                 </a>
             </div>
@@ -139,7 +161,7 @@
                         <div class="code-text">
                             <code></code>
                         </div>
-                        <a href="CV_Justin_MAMBIKI.pdf" download class="btn-explore">
+                        <a href="CV Justin MAMBIKI alternance 2.0.pdf" download class="btn-explore">
                             TÉLÉCHARGER MON CV <i class="fas fa-download"></i>
                         </a>
                     </div>
@@ -180,7 +202,7 @@
                         Actuellement étudiant en <strong>Master 1 Ingénierie Systèmes, Réseaux et Cybersécurité</strong> à l'Institut F2I, je suis passionné par les infrastructures complexes. Avec une solide expérience terrain chez <strong>NS Réseaux - Congo Telecom</strong> (Fibre Optique) et en administration système chez <strong>Isis Conseils</strong>, je combine savoir-faire technique et rigueur.
                     </p>
                     <p>
-                        🚀 <strong>Mon objectif :</strong> Je recherche une alternance de 1 an à partir de Septembre 2026.
+                        🚀 <strong>Mon objectif :</strong> Je recherche une alternance de 2 ans pour mes années de cycle ingénieur. <!--[cite: 1]-->
                     </p>
                 </div>
             </section>
@@ -192,22 +214,21 @@
                 
                 <div class="experience-timeline">
 
-                    <!-- CARTE STAGE 1 : NS Réseaux -->
                     <div class="experience-card">
                         <div class="exp-header">
-                            <h3>Technicien Déploiement Fibre Optique (D3)</h3> <!--[cite: 4] -->
-                            <span class="exp-company">NS Réseaux - Congo Telecom</span> <!--[cite: 4] -->
-                            <span class="exp-date">sept. 2024 - mars 2025</span> <!--[cite: 4] -->
+                            <h3>Technicien Déploiement Fibre Optique (D3)</h3>
+                            <span class="exp-company">NS Réseaux - Congo Telecom</span>
+                            <span class="exp-date">sept. 2024 - mars 2025</span>
                         </div>
                         <div class="exp-body">
-                            <p><strong>Contexte :</strong> Intervention sur l'ensemble de la chaîne FTTH (NRO, PM, Colonne montante) pour le raccordement client.</p> <!--[cite: 4] -->
+                            <p><strong>Contexte :</strong> Intervention sur l'ensemble de la chaîne FTTH (NRO, PM, Colonne montante) pour le raccordement client.</p>
                             
                             <p><strong>Mes missions :</strong></p>
                             <ul>
-                                <li>Déploiement FTTH (D3), tirage de câbles et raccordement des abonnés finaux (PTO) depuis le PBO. <!--[cite: 4] --></li>
-                                <li>Réalisation de soudures optiques de précision et gestion des cassettes dans les boîtiers de distribution. <!--[cite: 4] --></li>
-                                <li>Validation des liens optiques par tests de continuité (Stylo optique) et mesures d'affaiblissement (Photométrie/Réflectométrie). <!--[cite: 4] --></li>
-                                <li>Diagnostic expert des pannes (détection de coupures, courbures) et intervention de maintenance curative. <!--[cite: 4] --></li>
+                                <li>Déploiement FTTH (D3), tirage de câbles et raccordement des abonnés finaux (PTO) depuis le PBO.</li>
+                                <li>Réalisation de soudures optiques de précision et gestion des cassettes dans les boîtiers de distribution.</li>
+                                <li>Validation des liens optiques par tests de continuité (Stylo optique) et mesures d'affaiblissement (Photométrie/Réflectométrie).</li>
+                                <li>Diagnostic expert des pannes (détection de coupures, courbures) et intervention de maintenance curative.</li>
                             </ul>
                             
                             <div class="exp-tech">
@@ -223,22 +244,21 @@
                         </div>
                     </div>
 
-                    <!-- CARTE STAGE 2 : Isis Conseils -->
                     <div class="experience-card">
                         <div class="exp-header">
-                            <h3>Assistant Administrateur Système & Réseau</h3> <!--[cite: 4] -->
-                            <span class="exp-company">Isis Conseils</span> <!--[cite: 4] -->
-                            <span class="exp-date">avril 2024 - juill. 2024</span> <!--[cite: 4] -->
+                            <h3>Assistant Administrateur Système & Réseau</h3>
+                            <span class="exp-company">Isis Conseils</span>
+                            <span class="exp-date">avril 2024 - juill. 2024</span>
                         </div>
                         <div class="exp-body">
-                            <p><strong>Contexte :</strong> Audit de l'infrastructure existante, optimisation de la sécurité et support technique interne.</p> <!--[cite: 4] -->
+                            <p><strong>Contexte :</strong> Audit de l'infrastructure existante, optimisation de la sécurité et support technique interne.</p>
                             
                             <p><strong>Mes missions :</strong></p>
                             <ul>
-                                <li>Installation, configuration et gestion sous Windows Server (Active Directory, DNS, DHCP). <!--[cite: 4] --></li>
-                                <li>Déploiement automatisé de systèmes d'exploitation en réseau via serveur PXE et WDS. <!--[cite: 5] --></li>
-                                <li>Gestion et sécurisation des partages de fichiers avec FSRM (quotas, filtres) et arborescence DFS. <!--[cite: 5] --></li>
-                                <li>Audit informatique, maintenance du parc et création d'applications web. <!--[cite: 4] --></li>
+                                <li>Installation, configuration et gestion sous Windows Server (Active Directory, DNS, DHCP).</li>
+                                <li>Déploiement automatisé de systèmes d'exploitation en réseau via serveur PXE et WDS.</li>
+                                <li>Gestion et sécurisation des partages de fichiers avec FSRM (quotas, filtres) et arborescence DFS.</li>
+                                <li>Audit informatique, maintenance du parc et création d'applications web.</li>
                             </ul>
                             
                             <div class="exp-tech">
@@ -255,20 +275,19 @@
                         </div>
                     </div>
 
-                    <!-- CARTE STAGE 3 : ASECNA -->
                     <div class="experience-card">
                         <div class="exp-header">
-                            <h3>Technicien de Maintenance Informatique</h3> <!--[cite: 4] -->
-                            <span class="exp-company">ASECNA</span> <!--[cite: 4] -->
-                            <span class="exp-date">avril 2023 - juin 2023</span> <!--[cite: 4] -->
+                            <h3>Technicien de Maintenance Informatique</h3>
+                            <span class="exp-company">ASECNA</span>
+                            <span class="exp-date">avril 2023 - juin 2023</span>
                         </div>
                         <div class="exp-body">
-                            <p><strong>Contexte :</strong> Garantie de la disponibilité matérielle et logicielle pour les services de navigation aérienne.</p> <!--[cite: 4] -->
+                            <p><strong>Contexte :</strong> Garantie de la disponibilité matérielle et logicielle pour les services de navigation aérienne.</p>
                             
                             <p><strong>Mes missions :</strong></p>
                             <ul>
-                                <li>Maintenance préventive et curative des équipements informatiques et météorologiques haute précision. <!--[cite: 4] --></li>
-                                <li>Support technique réactif et diagnostic approfondi (matériel et logiciel). <!--[cite: 4] --></li>
+                                <li>Maintenance préventive et curative des équipements informatiques et météorologiques haute précision.</li>
+                                <li>Support technique réactif et diagnostic approfondi (matériel et logiciel).</li>
                             </ul>
                             
                             <div class="exp-tech">
@@ -285,9 +304,9 @@
                     </div>
 
                 </div>
-            </section> <!-- FIN DE LA SECTION EXPÉRIENCES -->
+            </section>
                 
-            <section id="expertise" class="section-padding"> <!-- DÉBUT DE LA SECTION EXPERTISE -->
+            <section id="expertise" class="section-padding">
                 
                 <div class="section-title">
                     <h2>Mes Domaines d'Expertise</h2>
@@ -354,7 +373,7 @@
                                 <button id="btn-add-skill" class="btn-lab-small"><i class="fas fa-plus"></i></button>
                             </div>
                             <ul id="dynamic-skills-list">
-                                </ul>
+                            </ul>
                         </div>
                     </div>
                 </div>

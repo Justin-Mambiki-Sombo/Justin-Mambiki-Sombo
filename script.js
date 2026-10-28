@@ -1,5 +1,50 @@
 document.addEventListener('DOMContentLoaded', function() {
     
+    // --- 0. ANIMATION DE L'ÉCRAN DE CHARGEMENT ---
+   const splashScreen = document.getElementById('splash-screen');
+    const splashText = document.getElementById('splash-text');
+    const splashLogoWrapper = document.getElementById('logo-wrapper');
+    const splashContent = document.querySelector('.splash-content');
+
+    if (splashScreen) {
+        const textToType = "Alternance";
+        let i = 0;
+        
+        // 1. Taper le mot "Alternance" lettre par lettre
+        const typeInterval = setInterval(() => {
+            splashText.textContent += textToType.charAt(i);
+            i++;
+            
+            // Quand le mot est fini
+            if (i >= textToType.length) {
+                clearInterval(typeInterval);
+                
+                // 2. Pause pour lire, puis on cache le logo
+                setTimeout(() => {
+                    splashLogoWrapper.style.opacity = '0';
+                    
+                    // 3. Changement du texte en "Bienvenue"
+                    setTimeout(() => {
+                        splashLogoWrapper.style.display = 'none';
+                        splashText.textContent = 'Bienvenue';
+                        splashText.classList.add('no-cursor'); // Retire le curseur clignotant
+                        
+                        // 4. Aspiration dans le site
+                        setTimeout(() => {
+                            splashContent.classList.add('zoom-into-site');
+                            splashScreen.style.opacity = '0'; 
+                            
+                            // 5. Nettoyage
+                            setTimeout(() => {
+                                splashScreen.style.display = 'none';
+                            }, 1200);
+                        }, 800);
+                    }, 400);
+                }, 800);
+            }
+        }, 80); // 80ms par lettre, modifie ce chiffre pour taper plus vite ou plus lentement
+    }
+    
     // --- 1. CIBLAGE DU BON ÉLÉMENT QUI SCROLLE ---
     const scrollContainer = document.querySelector('.main-content');
     
@@ -177,5 +222,4 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
 });
